@@ -1,9 +1,9 @@
 module Mutations
   class BaseNormalUserMutation < BaseMutation
-    def authorized?
+    def authorized?(args)
       raise GraphQL::ExecutionError, 'login required!!' unless context[:current_user]
 
-      super
+      true
     end
   end
 end

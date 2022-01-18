@@ -24,10 +24,10 @@ class GraphqlController < ApplicationController
     def current_user
       # if we want to change the sign-in strategy, this is the place to do it
       
-      return if request.headers['Authorization'].nil?
-
+      return if request.headers['Authorization'].nil? or request.headers['Authorization'].empty?
       crypt = ActiveSupport::MessageEncryptor.new(Rails.application.credentials.secret_key_base.byteslice(0..31))
-      authorization_token = request.headers['Authorization'].split(" ")[1]
+      authorization_token = request.headers['Authorization'].split(" ").last
+      
       token = crypt.decrypt_and_verify authorization_token
       user_id = token.gsub('user-id:', '').to_i
       # binding.pry

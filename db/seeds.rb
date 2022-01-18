@@ -11,7 +11,8 @@ Spree::Auth::Engine.load_seed if defined?(Spree::Auth)
 
 # Task 1 :: Create default super admin user
 Spree::Role.create!([
-  { name: 'super_admin'}
+  { name: 'super_admin'},
+  { name: 'normal' }
 ])
 
 Spree.user_class.create({
